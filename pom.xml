@@ -42,7 +42,7 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sun.codemodel</groupId>
+    <groupId>io.typeset.codemodel</groupId>
     <artifactId>codemodel-project</artifactId>
     <name>Codemodel</name>
     <description>Java source code generation library</description>
@@ -62,6 +62,42 @@
         <system>JIRA</system>
         <url>http://java.net/jira/browse/CODEMODEL</url>
     </issueManagement>
+    <repositories>
+        <repository>
+            <id>s3-release-repo</id>
+            <name>S3 Release Repository</name>
+            <url>s3://typeset-jrepo-public/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>s3-snapshot-repo</id>
+            <name>S3 Snapshot Repository</name>
+            <url>s3://typeset-jrepo-public/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>s3-release-repo</id>
+            <name>Release Repository</name>
+            <url>s3://typeset-jrepo-public/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>s3-snapshot-repo</id>
+            <name>Snapshot Repository</name>
+            <url>s3://typeset-jrepo-public/snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
     <!-- this is a guess based on the first commit -->
     <inceptionYear>2005</inceptionYear>
     <mailingLists>
@@ -165,6 +201,13 @@
                 <version>2.3</version>
             </plugin>
         </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.springframework.build</groupId>
+                <artifactId>aws-maven</artifactId>
+                <version>5.0.0.RELEASE</version>
+            </extension>
+        </extensions>
     </build>
     <reporting>
         <plugins>
